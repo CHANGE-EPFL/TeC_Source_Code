@@ -30,9 +30,9 @@ B_IO.DepK= DepK;
 %%%%%%%%%%%
 B_IO.Tup_P=Tup_P;
 B_IO.Tup_K=Tup_K;
-%%%%% Scaling parameter
+%%%%% Scaling parameters
 B_IO.SC_par=1;
-%%%%% Manure parameters 
+%%%%% Manure parameter
 B_IO.ManF = ManF;  %%% [gC /m2 day]
 B_IO.N_Man = N_Man; %% Manure  [gC/gN]
 B_IO.P_Man = P_Man; % Manure  [gC/gP]
@@ -45,7 +45,9 @@ return
 function[DepN,DepP,DepK,FertN,FertP,FertK,ManF,N_Man,P_Man,K_Man,Lig_fr_Man]=Biogeochemistry_IP(Lat,Lon,HIST)
 %%%%%%%%%%%%%%
 %%%% External Inputs [gX/m2 day]
-load('Users\Simone\Documents\GitHub\TeC\Inputs\All_deposition_data.mat')
+global all_deposition_path
+load(all_deposition_path)
+
 if HIST == 1 %%%% historical pre-industrial depositions
     DepN = griddata(LonN_Gl,LatN_Gl,Ndep1860',Lon,Lat,'nearest'); DepN=DepN/1000/365;
     DepP = interp2((LonP),(LatP),(DepP_hist'),Lon,Lat,'nearest'); DepP=DepP/1000/365;
